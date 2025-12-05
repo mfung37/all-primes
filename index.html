@@ -72,7 +72,6 @@
       if (start < primes[primes.length - 1]) {
         let left = 0;
         let right = primes.length - 1;
-        let i = 0;
         while (left <= right) {
           let mid = Math.floor((left + right) / 2);
           if (primes[mid] == start) {
@@ -84,7 +83,22 @@
           else
             right = mid - 1;
         }
-        nums = primes.slice(left);
+        let start_index = left;
+        left = 0;
+        right = primes.length - 1;
+        while (left <= right) {
+          let mid = Math.floor((left + right) / 2);
+          if (primes[mid] == end) {
+            left = mid;
+            break;
+          }
+          else if (primes[mid] < end)
+            left = mid + 1;
+          else
+            right = mid - 1;
+        }
+
+        nums = primes.slice(start_index, left);
       }
       for (let i = 0; i < vec.length; i++) {
         if (i != 0xFFFFFFFF) {
@@ -113,8 +127,8 @@
 
     function show() {
       if (i == 2) {
-        document.getElementById("space").innerHTML = listPrimes(i, i + 540).join('; ');
-        i += 540;
+        document.getElementById("space").innerHTML = listPrimes(i, i + 4600).join('; ');
+        i += 4600;
         return;
       }
       // use prime number theorem to try to get around N primes per page
@@ -137,17 +151,17 @@
     i = 2;
   </script>
   <style>
-    body {
-      width: 100%;
+    h1 {
+      height: 30px;
     }
     #space {
-      height: 800px;
+      height: calc(100vh - 150px);
+      font-family: monospace;
     }
   </style>
 
-
   <h1>The List of All Primes</h1>
   <div id="space"></div>
-
+  
   <div> <a href="javascript:show()"> Next page. </a> </div>
 </html>
