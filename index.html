@@ -159,22 +159,30 @@
     };
   </script>
   <style>
-    h1 {
-      height: 30px;
-    }
     #space {
-      height: calc(100vh - 150px);
+      height: 85vh;
       overflow-y: scroll;
       font-family: monospace;
       margin: 10px;
     }
+
+    @media screen and (max-width: 600px) {
+      #controls {
+        font-size: 20pt;
+      }
+
+      #controls button {
+        height: 2em;
+      }
+    }
+
   </style>
 
   <h1>The List of All Primes</h1>
   <div id="space"></div>
   
-  <div> 
-    <a href="javascript:show()">Next page</a> 
+  <div id="controls"> 
+    <button onclick="show()">Next page</button> 
     <span style="padding:5px">
       Approximate Number of Primes Per Page: 
       <input type="text" id="chunk">
